@@ -27,7 +27,6 @@ def decode_numbers_memo(message: str, decoder: dict, memo = {}) -> int:
 	message = str(message)	
 	amount = 0
 
-
 	if message == "":
 		return 1
 	if message in memo:
