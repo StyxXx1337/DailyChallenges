@@ -23,9 +23,10 @@ def decode_numbers(message: str, decoder: dict) -> int:
 
 # Including memorization
 def decode_numbers_memo(message: str, decoder: dict, memo = {}) -> int:
-	amount = 0
 	# In case a Integer is given instead of a string
-	message = str(message)
+	message = str(message)	
+	amount = 0
+
 
 	if message == "":
 		return 1
