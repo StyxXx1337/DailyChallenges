@@ -12,3 +12,19 @@
 #
 #
 
+
+class Node:
+    def __init__(self, val: int, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+    def __repr__(self):
+        return "Node:{}, Left:{}, Right:{}".format(self.val, self.left, self.right)
+
+
+tree = Node(0, Node(1), Node(0, Node(1, Node(1), Node(1)), Node(0)))
+
+
+def count_unival_tree(tree: Node) -> int:
+    pass
