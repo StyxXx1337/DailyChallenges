@@ -20,9 +20,9 @@ class OrdersLog:
         if element >= len(self.record):
             return None
 
-        id = self.index - (element+1)
+        id = self.index - (element+1)  # +1 is because the index is on the next slot
         if id < 0:
-            id = len(self.record) + (id)
+            id = len(self.record) + (id)  # wrap around, in case the id gets below 0
 
         return self.record[id]
 
