@@ -10,34 +10,44 @@ class OrdersLog:
         self.index = 0
         self.record = [None] * amt
 
-    def record(self, order_id: int) -> None:
+    def _record(self, order_id: int) -> None:
         self.record[self.index] = order_id
         self.index += 1
         if self.index == len(self.record):
             self.index = 0
 
     def get_last(self, element: int) -> int:
-        return self.record[element]
+        if element >= len(self.record):
+            return None
+
+        id = self.index - (element+1)
+        if id < 0:
+            id = len(self.record) + (id)
+
+        return self.record[id]
 
     def __repr__(self) -> str:
         string = "[ "
         for el in self.record:
             string += str(el) + ' '
 
-        string += "]\n"
+        string += "]"
         return string
 
+# Test Code
+log = OrdersLog(3)      # [None, None, None]
+print(log)              # [None, None, None]
 
-log = OrdersLog(3)
+log._record(10)         # [10, None, None]
+log._record(11)         # [10, 11, None]
+log._record(12)         # [10, 11, 12]
 print(log)
 
-log.record(10)
-log.record(11)
-log.record(12)
-print(log)
+log._record(13)         # [13, 11, 12]
+print(log)              # [13, 11, 12]
 
-log.record(13)
-print(log)
-
-print(log.get_last(1))
+print(log.get_last(0))  # 13
+print(log.get_last(1))  # 12
+print(log.get_last(2))  # 11
+print(log.get_last(3))  # Error - > None
 print(log)
