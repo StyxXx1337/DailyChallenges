@@ -8,26 +8,27 @@
 # Do this in O(n) time and O(k) space. You can modify the input array in-place and you do not need to store the results.
 # You can simply print them out as you compute them.
 
-def max_sub_array(array: list, length: int)-> list:
+def max_sub_array(array: list, length: int) -> list:
     """Solution with 
     Time Complexity: O(n)
     Space Complexity: O(n+k)
     """
     start = 0
-    result =[] # Additional Space of (len(array) - 1)
+    result = []  # Additional Space of (len(array) - 1)
     end = length
 
-    while end <= len(array): # Time Complexity O(n-k) -> Worst Case O(n) n -> inf k = 1
-        result.append(max(array[start:end])) # Additional Space in every loop of O(k)
+    while end <= len(array):  # Time Complexity O(n-k) -> Worst Case O(n) n -> inf k = 1
+        result.append(max(array[start:end]))  # Additional Space in every loop of O(k)
         start += 1
         end += 1
 
     return result
 
 
-print(max_sub_array([10,5,2,7,8,7],3))
+print(max_sub_array([10, 5, 2, 7, 8, 7], 3))
 
-def max_sub_array_inplace(array: list, length: int)-> list:
+
+def max_sub_array_inplace(array: list, length: int) -> list:
     """Solution with 
     Time Complexity: O(n)
     Space Complexity: O(k)
@@ -35,11 +36,12 @@ def max_sub_array_inplace(array: list, length: int)-> list:
     start = 0
     end = length
 
-    while end <= len(array): # Time Complexity O(n-k) -> Worst Case O(n) n -> inf k = 1
-        array[start] = max(array[start:end]) # Additional Space in every loop of O(k)
+    while end <= len(array):  # Time Complexity O(n-k) -> Worst Case O(n) n -> inf k = 1
+        array[start] = max(array[start:end])  # Additional Space in every loop of O(k)
         start += 1
         end += 1
 
     return array[:-2]
 
-print(max_sub_array_inplace([10,5,2,7,8,7],3))
+
+print(max_sub_array_inplace([10, 5, 2, 7, 8, 7], 3))
