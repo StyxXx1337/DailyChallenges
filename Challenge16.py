@@ -8,43 +8,44 @@
 class OrdersLog:
     def __init__(self, amt: int) -> None:
         self.index = 0
-        self.record = [None] * amt
+        self.log = [None] * amt
 
-    def _record(self, order_id: int) -> None:
-        self.record[self.index] = order_id
+    def record(self, order_id: int) -> None:
+        self.log[self.index] = order_id
         self.index += 1
-        if self.index == len(self.record):
+        if self.index == len(self.log):
             self.index = 0
 
     def get_last(self, element: int) -> int:
-        if element >= len(self.record):
+        if element >= len(self.log):
             return None
 
-        id = self.index - (element+1)  # +1 is because the index is on the next slot
+        id = self.index - (element + 1)  # +1 is because the index is on the next slot
         if id < 0:
-            id = len(self.record) + (id)  # wrap around, in case the id gets below 0
+            id = len(self.log) + (id)  # wrap around, in case the id gets below 0
 
-        return self.record[id]
+        return self.log[id]
 
     def __repr__(self) -> str:
         string = "[ "
-        for el in self.record:
+        for el in self.log:
             string += str(el) + ' '
 
         string += "]"
         return string
 
-# Test Code
-log = OrdersLog(3)      # [None, None, None]
-print(log)              # [None, None, None]
 
-log._record(10)         # [10, None, None]
-log._record(11)         # [10, 11, None]
-log._record(12)         # [10, 11, 12]
+# Test Code
+log = OrdersLog(3)  # [None, None, None]
+print(log)  # [None, None, None]
+
+log.record(10)  # [10, None, None]
+log.record(11)  # [10, 11, None]
+log.record(12)  # [10, 11, 12]
 print(log)
 
-log._record(13)         # [13, 11, 12]
-print(log)              # [13, 11, 12]
+log.record(13)  # [13, 11, 12]
+print(log)  # [13, 11, 12]
 
 print(log.get_last(0))  # 13
 print(log.get_last(1))  # 12
