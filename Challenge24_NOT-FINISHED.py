@@ -1,3 +1,4 @@
+# [ MEDIUM ]
 # Implement locking in a binary tree. A binary tree node can be locked or unlocked
 # only if all of its descendants or ancestors are not locked.
 # Design a binary tree node class with the following methods:
