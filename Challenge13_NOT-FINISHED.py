@@ -6,4 +6,4 @@
 
 
 def longest_string_with_k_letters(st: str, k: int) -> str:
-
+    pass
