@@ -20,56 +20,58 @@ def justify_text(in_list: list[str], k: int) -> list[str]:
     k_counter = 0
     word_counter = 0
 
-    for i in range(len(in_list)):
+    for i in range(len(in_list) + 1):
         k_counter += len(in_list[i])
         word_counter += 1
 
-        if k_counter >= k:
-            if k_counter == k:
-                # If there is no need for extra spaces just join
-                temp = ' '.join(in_list[start : i + 1])
-                solution.append(temp)
-                start = i + 1
-                k_counter = 0
+        if k_counter == k:
+            # If there is no need for extra spaces just join
+            temp = ' '.join(in_list[start : i + 1])
+            solution.append(temp)
+            start = i + 1
+            k_counter = 0
 
-            else:
+        elif k_counter > k or i == (len(in_list) - 1):
+
+            if k_counter > k:
                 # If there are additional spaces to be distributed
                 k_counter -= len(in_list[i]) + 1  # -1 for the additional Space
-                print(k_counter)
                 word_counter -= 1
-                extra_spaces = k - k_counter
-                space_per_gap = extra_spaces // (word_counter - 1)
-                left_overs = extra_spaces % (word_counter - 1)
 
-                # For DEBUGGING
-                print("extra_spaces: ", extra_spaces)
-                print("space_per_gap: ", space_per_gap)
-                print("left_overs: ", left_overs)
+            extra_spaces = (k - k_counter) + (word_counter - 1)
+            space_per_gap = extra_spaces // (word_counter - 1)
+            left_overs = extra_spaces % (word_counter - 1)
 
-                temp_list = []
+            # For DEBUGGING
+            # print("extra_spaces: ", extra_spaces)
+            # print("space_per_gap: ", space_per_gap)
+            # print("left_overs: ", left_overs)
 
-                # TODO Doesnt work....
-                for item in range(start, i):
-                    temp_list.append(in_list[item])
-                    if item < (i - 1):
-                        if space_per_gap > 0:
-                            temp_list.append(
-                                ' ' * space_per_gap
-                            )  # Issue since the 'join' adds an other SPACE.
-                        if left_overs > 0:
-                            temp_list.append(' ')
-                            left_overs -= 1
+            temp_list = []
 
-                print(temp_list)
+            # TODO Doesnt work....
+            for item in range(start, i):
+                temp_list.append(in_list[item])
+                if item < (i - 1):
+                    if space_per_gap > 0:
+                        temp_list[-1] += ' ' * space_per_gap
+                        # Issue since the 'join' adds an other SPACE.
+                    if left_overs > 0:
+                        temp_list.append(' ')
+                        left_overs -= 1
 
-                temp = ' '.join(temp_list)
-                solution.append(temp)
-                start = i
-                k_counter = len(in_list[i])
+            temp = ''.join(temp_list)
+            solution.append(temp)
+            start = i
+            k_counter = len(in_list[i])
+            print("Start: ", start)
+            print("k_counter: ", k_counter)
 
         else:
             # Add one for the space
             k_counter += 1
+
+        print(in_list[i])
 
     return solution
 
