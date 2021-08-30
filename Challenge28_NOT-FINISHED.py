@@ -25,17 +25,17 @@ def justify_text(in_list: list[str], k: int) -> list[str]:
     word_counter = 0
 
     for i in range(len(in_list) + 1):
-        k_counter += len(in_list[i])
-        word_counter += 1
 
-        if k_counter == k:
+        if i <= len(in_list) and (k_counter + len(in_list[i])) == k:
             # If there is no need for extra spaces just join
+            word_counter += 1
             temp = ' '.join(in_list[start : i + 1])
             solution.append(temp)
             start = i + 1
             k_counter = 0
 
-        elif k_counter > k or i == (len(in_list) - 1):
+        elif i <= len(in_list) and (k_counter + len(in_list[i]) > k or i == (len(in_list) - 1)):
+            word_counter += 1
 
             if k_counter > k:
                 # If there are additional spaces to be distributed
@@ -74,6 +74,7 @@ def justify_text(in_list: list[str], k: int) -> list[str]:
         else:
             # Add one for the space
             k_counter += 1
+            word_counter += 1
 
         print(in_list[i])
 
